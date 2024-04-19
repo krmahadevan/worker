@@ -20,6 +20,7 @@ public class WorkerIngressController {
         HttpHeaders outgoingHeaders = new HttpHeaders();
         outgoingHeaders.set("X-Worker-Id", UUID.randomUUID().toString());
         headers.forEach(outgoingHeaders::set);
+        outgoingHeaders.remove(HttpHeaders.CONTENT_LENGTH);
         ResponseEntity<Greeting> reply = ResponseEntity.ok()
                 .headers(outgoingHeaders)
                 .body(new Greeting("Greetings from worker " + UUID.randomUUID()));
